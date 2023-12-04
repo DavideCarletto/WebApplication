@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html lang = "it">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Introduzione alle applicazioni web</title>
+        <meta name = "viewport" content="width=device-width, initial-scale=1">
+        <meta name = "description" content="Primo laboratorio su html">
+        <meta name = "Author" content="Davide Carletto">
+        <link rel = "stylesheet" type="text/css" href = "style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1 id="titolo">A Big Title</h1>
+            <p id="header-info">
+                <a href="#" title="Home">Home</a>
+                    | 
+                <a href="#" title="Chi siamo">Chi siamo</a>
+            </p>
+        </header>
+         
+        <main>
+            <aside>
+                <a id = "oggi" class= "aside-link" href="#" title="Oggi">Oggi</a>
+                <a id = "questa-settimana" class= "aside-link" href="#" title="Questa settimana">Questa settimana</a>
+                <a id ="questo-mese" class= "aside-link" href="#" title="Questo mese">Questo mese</a>
+            </aside>
+            
+            <section id= "posts-section">
+                <article class = "post">
+                    <img class = "post-picture" src="src/images/img1.jpg" alt="Foto post"> 
+                    <section class= "post-description-section">
+                        <img class= "profile-picture" src="src/images/user.jpg" alt="Foto profilo"> 
+                        <p class = "post-info-name">@Luigi</p>
+                        <p class = "post-info-date">2 giorni fa</p>
+                        <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, numquam asperiores quaerat expedita iusto error iste odio! Deserunt sapiente, dolorem eveniet tenetur magni asperiores et! Similique asperiores officia dignissimos fugit!</p>
+                    </section>
+                </article>
+                
+                <article class = "post">
+                    <img class = "post-picture" src="src/images/img2.jpg" alt="Foto post"> 
+                    <section class= "post-description-section">
+                        <img class= "profile-picture" src="src/images/user.jpg" alt="Foto profilo"> 
+                        <p class = "post-info-name">@Alberto</p>
+                        <p class = "post-info-date">4 giorni fa</p>
+                        <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, numquam asperiores quaerat expedita iusto error iste odio! Deserunt sapiente, dolorem eveniet tenetur magni asperiores et! Similique asperiores officia dignissimos fugit!</p>
+                    </section>
+                </article>
+                
+                <article class = "post" id= "last-post">
+                    <img class = "post-picture" src="src/images/img3.jpg" alt="Foto post">
+                    <section class= "post-description-section">
+                        <img class= "profile-picture" src="src/images/user.jpg" alt="Foto profilo"> 
+                        <p class = "post-info-name">@Juan</p>
+                        <p class = "post-info-date">4 giorni fa</p>
+                        <p class="post-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda, numquam asperiores quaerat expedita iusto error iste odio! Deserunt sapiente, dolorem eveniet tenetur magni asperiores et! Similique asperiores officia dignissimos fugit!</p>
+                    </section>
+                </article> 
+            </section>
+            <img id= "add-btn" src="src/images/noun-plus-5159238.png" alt="AddBtn">
+        </main>
+    </body>
+        
+        </html>

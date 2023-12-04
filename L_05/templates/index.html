@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html lang = "it">
+
+    <head>
+        <meta charset="UTF-8">
+        <title>Introduzione alle applicazioni web</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name = "description" content="Primo laboratorio su html">
+        <meta name = "Author" content="Davide Carletto">
+         {% block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+            <link rel = "stylesheet" type="text/css" href = "{{style}}">
+        {% endblock %}
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg d custom-navbar py-4 border-custom">
+            <div class="container-fluid">
+              <a class="navbar-brand col-10" href="#">A Big Title</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarText">
+                <span class="navbar-text ">
+                  <a href="#">Home</a> |
+                  <a href={{ info }}>Chi siamo </a>
+                </span>
+              </div>
+            </div>
+          </nav>
+        
+        <main class="row py-5">
+            <aside class="d-flex flex-lg-column col-lg-3 col-11 aside-lg-custom aside-custom border-custom margin-custom">
+                <a id = "oggi" class= "flex-fill aside-link link-dark" href="#" title="Oggi">Oggi</a>
+                <a id = "questa-settimana" class= "flex-fill link-dark aside-link text-lg-start text-center" href="#" title="Questa settimana">Questa settimana</a>
+                <a id ="questo-mese" class= "flex-fill link-dark aside-link h-100 text-lg-start text-end" href="#" title="Questo mese">Questo mese</a>
+            </aside>
+
+            <section class = "d-flex flex-column col-lg col-11 py-3 border-custom mt-lg-0 mt-5 margin-custom" id= "posts-section">
+                {% for user_post in posts %}
+                <article class = "d-flex flex-xs-column py-xs-5">
+                    <a href="{{post}}" class = "post-picture mb-lg-5 mb-md-5 mb-sm-5 w-lg-50 w-md-50">
+                        <img class="w-100 d-inline" src="{{url_for('static', filename = user_post.post_img)}}" alt="Foto post">
+                    </a>
+                    <section class= "d-flex flex-wrap px-lg-3 px-md-3 px-sm-3 post-description-section h-50 flex-fill w-50 w-xs-100">
+                        <img class= "h-25 h-sx-25 profile-picture" src="{{url_for('static', filename = user_post.profile_img)}}" alt="Foto profilo">
+                        <p class="h-25 h-sx-25">{{ user_post.username }}</p>
+                        <p class = "h-25 h-sx-25 text-end flex-grow-1">{{ user_post.data}}</p>
+                        <p class= "text-justify flex-wrap h-sx-65">{{ user_post.testo }}</p>
+                    </section>
+                </article>
+                {% endfor %}
+                
+            </section>
+            <img class= "fixed-bottom " id= "add-btn" src="{{url_for('static', filename = 'images/noun-plus-5159238.png')}}" alt="AddBtn">
+        </main>
+            {% block scripts %}
+                <!-- Optional JavaScript -->
+                {{ bootstrap.load_js() }}
+            {% endblock %}
+    </body>
+        
+        </html>

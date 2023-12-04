@@ -1,0 +1,440 @@
+/* telefonno */
+@media (max-width: 767px) {
+    body{
+        margin: 2% 5%;
+        /* background-color: #FFC6C4; */
+    }
+    
+    main{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 225%;
+        width: 95%;
+    }
+
+    header{
+        position: relative;
+        padding: 2%;
+        display: block;
+        border: .18em solid black;
+        background-color: #FCFFC4;
+    }
+    
+    #titolo{
+        display: inline;
+        font-size: 2.5rem;
+        font-family: cursive;
+    }
+    
+    #header-info{
+        position: absolute;
+        right: -7%;
+        display: inline;
+        position: absolute;
+        margin-right: 10%;
+    }
+
+    aside{
+        width: 93%;
+        height: 3%;
+        /* border: .18em solid black; */
+        padding: .5%;
+        /* background-color: #DFFFC4; */
+        display: flex;
+    }
+    
+    #oggi{
+        text-align: left;
+    }
+    
+    #questa-settimana{
+        text-align: center;
+    }
+
+    #questo-mese{
+        text-align: right;
+    }
+    .aside-link{
+        flex: 1;
+        color: black;
+        font-family: cursive;
+    }
+
+    #posts-section{
+        display: block;
+        border: .18em solid black;
+        left: 0%;
+        position: relative;
+        height: 94%;
+        width: 94%;
+        top:-2%;
+    }
+
+    .post{
+        background-color: bisque;
+        height: 33.2%;
+        position: relative;
+    }
+    
+    .post:not(#last-post){
+        border-bottom: .18em solid black ;
+    }
+
+    .profile-picture{
+        position: absolute;
+        width: 15%;
+        height: 20%;
+        left: 1%;
+        /* margin-top: 5%; */
+        top: 0%;
+    }
+
+    .post-picture{
+        width: 89%;
+        height: 60%;
+        display: block;
+        position: absolute;
+        left: 5%;
+        top: 4%;
+    }
+
+    .post-description-section{
+        position: absolute;
+        display: block;
+        left: 4%;
+        width: 90%;
+        height: 45%;
+        bottom: -10%;
+    }
+
+    .post-info-date, .post-info-name{
+        font-size: .9rem;
+        font-weight: bold;
+        display: inline;
+        top: 0%;
+    }
+
+    .post-info-name{
+        left: 19%;
+        position: absolute;
+    }
+
+    .post-info-date{
+        right: 5%;
+        position: absolute;
+    }
+
+    .post-text{
+        position: absolute;
+        left: 2%;
+        width: 93%;
+        font-size: .8rem;
+        font-family: cursive;
+        font-weight: 550;
+        font-style: italic;
+        top: 19%;
+        text-align: justify;
+    }
+
+    #add-btn{
+        height: 10%;
+        position: fixed;
+        bottom: 0;
+        right: 7%;
+    }
+
+}
+
+/* tabeletto */
+@media (min-width: 768px) and (max-width: 1023px){
+    body{
+        margin: 2% 5%;
+        /* background-color: #FFC6C4; */
+    }
+    
+    main{
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 100%;
+        width: 95%;
+    }
+
+    header{
+        position: relative;
+        padding: 2%;
+        display: block;
+        border: .18em solid black;
+        background-color: #FCFFC4;
+    }
+    
+    #titolo{
+        display: inline;
+        font-size: 2.5rem;
+        font-family: cursive;
+    }
+    
+    #header-info{
+        position: absolute;
+        right: -7%;
+        display: inline;
+        position: absolute;
+        margin-right: 10%;
+    }
+
+    aside{
+        width: 93%;
+        height: 3%;
+        /* border: .18em solid black; */
+        padding: .5%;
+        /* background-color: #DFFFC4; */
+        display: flex;
+    }
+    
+    #oggi{
+        text-align: left;
+    }
+    
+    #questa-settimana{
+        text-align: center;
+    }
+
+    #questo-mese{
+        text-align: right;
+    }
+    .aside-link{
+        flex: 1;
+        color: black;
+        font-family: cursive;
+    }
+
+    #posts-section{
+        display: block;
+        border: .18em solid black;
+        left: 0%;
+        position: relative;
+        height: 94%;
+        width: 94%;
+    }
+
+    .post{
+            /* padding: 2%; */
+        background-color: bisque;
+        height: 33.1%;
+        position: relative;
+    }
+    
+    .post:not(#last-post){
+        border-bottom: .18em solid black ;
+    }
+
+    .profile-picture{
+        position: absolute;
+        width: 15%;
+        height: 20%;
+        left: 2%;
+        /* margin-top: 5%; */
+        top: 0%;
+    }
+
+    .post-picture{
+        width: 45%;
+        height: 88%;
+        display: inline;
+        position: absolute;
+        left: 3%;
+        top: 5%;
+    }
+
+    .post-description-section{
+        position: absolute;
+        display: inline;
+        left: 50%;
+        width: 48%;
+        height: 88%;
+        top: 5%;
+    }
+
+    .post-info-date, .post-info-name{
+        font-size: .9rem;
+        font-weight: bold;
+        display: inline;
+        top: -7%;
+    }
+
+    .post-info-name{
+        left: 19%;
+        position: absolute;
+    }
+
+    .post-info-date{
+        right: 5%;
+        position: absolute;
+    }
+
+    .post-text{
+        position: absolute;
+        left: 2%;
+        width: 93%;
+        font-size: .8rem;
+        font-family: cursive;
+        font-weight: 550;
+        font-style: italic;
+        top: 19%;
+        text-align: justify;
+    }
+
+    #add-btn{
+        height: 10%;
+        position: fixed;
+        bottom: 0;
+        right: 7%;
+    }
+
+}
+
+/* pici */
+@media (min-width: 1024px)  {
+    body{
+        margin: 2% 5%;
+        /* background-color: #FFC6C4; */
+    }
+    
+    main{
+        position: absolute;
+        display: flex;
+        justify-content: space-between;
+        height: 100%;
+        width: 95%;
+    }
+
+    header{
+        position: relative;
+        margin: 2% 0%;
+        padding: 2%;
+        display: block;
+        border: .18em solid black;
+        background-color: #FCFFC4;
+    }
+    
+    #titolo{
+        display: inline;
+        font-size: 2.5rem;
+        font-family: cursive;
+    }
+    
+    #header-info{
+        position: absolute;
+        right: -7%;
+        display: inline;
+        position: absolute;
+        margin-right: 10%;
+    }
+
+    aside{
+        width: 27%;
+        height: 30%;
+        border: .18em solid black;
+        display: inline;
+        padding: .5%;
+        background-color: #DFFFC4;
+        position: relative;
+    }
+    
+    
+
+    .aside-link{
+        display: block;
+        color: black;
+        font-family: cursive;
+        font-size: 1.5em;
+    }
+
+    #posts-section{
+        display: inline;
+        border: .18em solid black;
+        right: 5.2%;
+        width: 60%;
+        position: absolute;
+        height: 90%;
+    }
+
+    .post{
+            /* padding: 2%; */
+        background-color: bisque;
+        height: 33.1%;
+        position: relative;
+    }
+    
+    .post:not(#last-post){
+        border-bottom: .18em solid black ;
+    }
+
+    .profile-picture{
+        position: absolute;
+        width: 10%;
+        height: 30%;
+        left: 2%;
+        /* margin-top: 5%; */
+        top: 0%;
+    }
+
+    .post-picture{
+        width: 17%;
+        height: 65%;
+        /* left: 5%; */
+        display: inline;
+        position: absolute;
+        left: 3%;
+        top: 5%;
+    }
+
+    .post-description-section{
+        position: absolute;
+        display: inline;
+        left: 22%;
+        width: 75%;
+        height: 90%;
+        top: 5%;
+    }
+
+    .post-info-date, .post-info-name{
+        font-size: .9rem;
+        font-weight: bold;
+        display: inline;
+        top: -9%;
+    }
+
+    .post-info-name{
+        left: 13%;
+        position: absolute;
+        top: -9%;
+    }
+
+    .post-info-date{
+        right: 5%;
+        position: absolute;
+    }
+
+    .post-text{
+        position: absolute;
+        left: 2%;
+        width: 95%;
+        font-size: .8rem;
+        font-family: cursive;
+        font-weight: 550;
+        font-style: italic;
+        text-align: justify;
+        top: 28%;
+    }
+
+    #add-btn{
+        height: 10%;
+        position: fixed;
+        bottom: 0;
+        right: 7%;
+    }
+}

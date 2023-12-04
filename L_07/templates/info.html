@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %} About {% endblock %}
+{% block content %}
+
+    <h1 class = "d-flex d-block flex-grow-1 py-4 justify-content-center navbar-brand"> Chi siamo</h1>
+
+<section class = "d-flex flex-grow-1 flex-xs-column w-xs-100 w-75 mx-auto">
+    <img class = "w-50 w-xs-75 w-md-35 h-100 mx-xs-auto ps-md-5 " src="{{ url_for('static', filename = 'images/Chi siamo.jpg') }}" alt="Foto">
+    <p class = "w-xs-75 py-0 ps-md-5 font-custom pt-xs-5 mx-xs-auto">
+       Siamo una squadra fortissimi e ci vogliamo tanto bene. Tranne a Michi, a lui proprio non ne vogliamo. Saremo pronti
+        ad accoglierlo tra noi solo nel momento in cui farà il passaggio nel dominio della frequenza. Fino ad allora, rimane
+        un mero estraneo
+    </p>
+</section>
+
+{% endblock %}

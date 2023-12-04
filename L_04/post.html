@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+
+<html lang = "it">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name = "description" content="Quarto laboratorio su html">
+        <meta name = "Author" content="Davide Carletto">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel = "stylesheet" type="text/css" href = "style2.css">
+    </head>
+
+    <body>
+        <nav class="navbar navbar-expand-lg custom-navbar custom-xs-navbar p-4 border-custom">
+          <div class="container-fluid">
+            <a class="navbar-brand col-10" href="#">A Big Title</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <span class="navbar-text">
+                <a href="#">Home</a> |
+                <a href="#">Chi siamo </a>
+              </span>
+            </div>
+          </div>
+        </nav>
+          <main class = "d-flex py-5 px-5 flex-column">
+            <section class= "row justify-content-center w-75 w-xs-100 mx-auto flex-xs-column" id="post-section">
+              <section class = "d-xs-flex d-none border-xs-owner" id = "post-owner-section">
+                <img class = " p-4 w-25 w-xs-custom h-100 h-md-75 rounded-circle" src="src/images/img3.jpg" alt="">
+                <p class="py-4 px-2 fw-bold fs-lg-custom fs-md-custom ">Alberto</p>
+                <p class= "py-4 pe-5 text-end flex-grow-1 fw-lighter fst-italic fs-lg-custom">2 giorni fa</p>
+              </section>
+              <section class = "px-0 col-5 w-xs-100 border-xs-lr" id="post-img-section">
+                <img class= "d-flex mx-auto w-xs-95 h-100  w-100 img-fluid" src="src/images/img1.jpg" alt="Post-1">
+              </section>
+
+              <section class="col-7 border-custom border-xs-lr d-flex flex-column px-0 pb-3 w-xs-100" id="right-post-section">
+                <section class = "d-flex" id = "post-owner-section">
+                  <img class = " p-4  w-25 w-xs-custom h-100 h-md-75  rounded-circle" src="src/images/img3.jpg" alt="">
+                  <p class="py-4 px-2 fw-bold fs-lg-custom fs-md-custom ">Alberto</p>
+                  <p class= "py-4 pe-5 text-end flex-grow-1 fw-lighter fst-italic fs-lg-custom">2 giorni fa</p>
+                </section>
+
+                <section class = "ps-4 pt-2 flex-grow-1" id="description-section">
+                  <p class = "fs-lg-custom">Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro odit necessitatibus eius maiores hic ad saepe labore nesciunt animi consectetur? Est, fuga nihil recusandae repellendus doloremque consequatur cupiditate aperiam omnis.</p>
+                </section>
+              </section>
+              </section>
+            </section>
+            <section class="w-75 w-xs-100 d-flex flex-column pb-3 mx-auto border-comment-custom" id="comment-section">
+              <p class="fw-bold fs-xl-custom flex-grow-1 text-center font-custom pt-5"> Commenti</p>
+              <section class = "d-flex " id = "comment-owner-section">
+                <img class = " p-4  w-md-custom h-md-custom w-lg-custom h-lg-custom w-xs-custom h-xs-custom rounded-circle" src="src/images/img3.jpg" alt="">
+                <section class="d-flex flex-column my-0">
+                  <section class="d-flex">
+                    <p class="pt-4 px-2 fw-bold fs-lg-custom fs-md-custom my-0">Alberto</p>
+                    <p class= "pt-4 px-3 fst-italic fw-lighter mt-lg-2 mb-0">2 giorni fa</p>
+                  </section>
+                  <p class = "px-2 pt-2 mb-4 fs-md-custom">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus quaerat voluptates, eveniet molestias architecto minima explicabo animi deleniti repudiandae natus, possimus porro reiciendis vel obcaecati ab ullam dolorum quas. Aut! .</p>
+                </section>
+              </section>
+
+              <section class = "d-flex " id = "comment-owner-section">
+                <img class = " p-4  w-md-custom h-md-custom w-lg-custom h-lg-custom w-xs-custom h-xs-custom rounded-circle" src="src/images/img3.jpg" alt="">
+                <section class="d-flex flex-column my-0">
+                  <section class="d-flex">
+                    <p class="pt-4 px-2 fw-bold fs-lg-custom fs-md-custom my-0">Alberto</p>
+                    <p class= "pt-4 px-3 fst-italic fw-lighter mt-lg-2 mb-0">2 giorni fa</p>
+                  </section>
+                  <p class = "px-2 pt-2 mb-4 fs-md-custom">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus quaerat voluptates, eveniet molestias architecto minima explicabo animi deleniti repudiandae natus, possimus porro reiciendis vel obcaecati ab ullam dolorum quas. Aut! .</p>
+                </section>
+              </section>
+
+              <section class = "d-flex " id = "comment-owner-section">
+                <img class = " p-4  w-md-custom h-md-custom w-lg-custom h-lg-custom w-xs-custom h-xs-custom rounded-circle" src="src/images/img3.jpg" alt="">
+                <section class="d-flex flex-column my-0">
+                  <section class="d-flex">
+                    <p class="pt-4 px-2 fw-bold fs-lg-custom fs-md-custom my-0">Alberto</p>
+                    <p class= "pt-4 px-3 fst-italic fw-lighter mt-lg-2 mb-0">2 giorni fa</p>
+                  </section>
+                  <p class = "px-2 pt-2 mb-4 fs-md-custom">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus quaerat voluptates, eveniet molestias architecto minima explicabo animi deleniti repudiandae natus, possimus porro reiciendis vel obcaecati ab ullam dolorum quas. Aut! .</p>
+                </section>
+              </section>
+            </section>
+          </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    </body>
+</html>

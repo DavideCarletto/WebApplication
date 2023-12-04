@@ -1,0 +1,53 @@
+.custom-navbar{
+    background-color: #FCFFC4;
+    margin: 0% 1%;
+}
+
+.navbar-brand{
+    font-size: 2.5rem;
+    font-family: cursive;
+}
+
+.font-custom{
+    font-family: cursive;
+}
+.border-custom{
+    border: 2.5px solid black;
+}
+
+.margin-custom{
+    margin: 0% 5%;
+}
+
+@media (max-width: 767px){
+
+    .w-xs-75{
+        width: 75%!important;
+    }
+
+    .w-xs-100{
+        width: 100%!important;
+    }
+    .flex-xs-column{
+        flex-direction: column!important;
+    }
+
+    .pt-xs-5{
+        padding-top: 5%!important;
+    }
+
+    .mx-xs-auto{
+        margin: 0 auto!important;
+    }
+}
+
+@media (min-width: 768px){
+
+    .w-md-35{
+        width: 35%!important;
+    }
+
+    .ps-md-5{
+        padding-left: 10%;
+    }
+}

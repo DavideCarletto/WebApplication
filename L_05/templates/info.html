@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Chi siamo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name = "description" content="Quinto laboratorio su html">
+        <meta name = "Author" content="Davide Carletto">
+         {% block styles %}
+            <!-- Bootstrap CSS -->
+            {{ bootstrap.load_css() }}
+             <link rel = "stylesheet" type = "text/css" href="{{ style }}">
+        {% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-expand-lg d custom-navbar py-4 border-custom">
+            <div class="container-fluid">
+              <a class="navbar-brand col-11" href="#">A Big Title</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarText">
+                <span class="navbar-text ">
+                  <a href="{{ index }}">Home</a>
+                </span>
+              </div>
+            </div>
+          </nav>
+<h1 class = "d-flex d-block flex-grow-1 py-4 justify-content-center navbar-brand"> Chi siamo</h1>
+
+<section class = "d-flex flex-grow-1 flex-xs-column w-xs-100 w-75 mx-auto">
+    <img class = "w-50 w-xs-75 w-md-35 h-100 mx-xs-auto ps-md-5 " src="{{ url_for('static', filename = 'images/Chi siamo.jpg') }}" alt="Foto">
+    <p class = "w-xs-75 py-0 ps-md-5 font-custom pt-xs-5 mx-xs-auto">
+       Siamo una squadra fortissimi e ci vogliamo tanto bene. Tranne a Michi, a lui proprio non ne vogliamo. Saremo pronti
+        ad accoglierlo tra noi solo nel momento in cui farà il passaggio nel dominio della frequenza. Fino ad allora, rimane
+        un mero estraneo
+    </p>
+</section>
+
+</body>
+</html>

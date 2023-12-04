@@ -1,0 +1,123 @@
+.custom-navbar{
+    background-color: #E8DFCA;
+    margin: 2% 10%;
+}
+
+/* body{
+    background-color: #FFF8EA;
+} */
+.navbar-brand{
+    font-size: 2.5rem;
+    font-family: 'Roboto', sans-serif;
+}
+.border-custom{
+    border: 1px solid gray;
+    border-top-right-radius: 5px;
+}
+#post-owner-section, #right-post-section, #description-section, #post-img-section{
+    background-color: #F5EFE6;
+}
+
+#comment-section{
+    background-color: #F5EFE6;
+}
+
+.font-custom{
+    font-family: 'Roboto', sans-serif;
+}
+.border-comment-custom{
+    border-left: 1px solid gray;
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.border-add-custom{
+    border: 1px solid gray;
+    border-radius: 5px;
+}
+
+.profile-picture{
+    border-radius: 20%;
+}
+
+.fs-xl-custom{
+    font-size: 2rem;
+}
+
+@media (max-width: 767px){
+    .d-xs-flex{
+        display: flex!important;
+    }
+    .d-xs-none{
+        display: none!important;
+    }
+    .flex-xs-column{
+        flex-direction: column!important;
+    }
+
+    .w-xs-100{
+        width: 100%!important;
+    }
+
+    .w-xs-95{
+        width: 95%!important;
+    }
+    .border-xs-none{
+        border: none;
+    }
+
+    .custom-xs-navbar{
+        margin: 2% 3%;
+    }
+
+    .border-xs-owner{
+        border-left: 1px solid gray;
+        border-right: 1px solid gray;
+        border-top: 1px solid gray;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+    }
+
+    .border-xs-lr{
+        border-top: none!important;
+        border-left: 1px solid gray!important;
+        border-right: 1px solid gray!important;
+        border-radius: 0!important;
+    }
+
+    .w-xs-custom{
+        width: 30%!important;
+    }
+    .h-xs-custom{
+        height: 30%!important;
+    }
+}
+
+@media (min-width: 768px){
+
+    .fs-md-custom{
+        font-size: 1.2rem;
+    }
+    .w-md-custom{
+        width: 15%!important;
+    }
+    .h-md-custom{
+        height: 15%!important;
+    }
+}
+
+@media (min-width: 992px){
+    .fs-lg-custom{
+        font-size: 1.5rem;
+    }
+    .w-lg-custom{
+        width: 12%!important;
+    }
+    .h-lg-custom{
+        height: 12%!important;
+    }
+    
+}
+

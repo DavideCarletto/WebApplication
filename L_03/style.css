@@ -1,0 +1,54 @@
+.custom-navbar{
+    background-color: #FCFFC4;
+    margin: 0% 1%;
+}
+
+.navbar-brand{
+    font-size: 2.5rem;
+    font-family: cursive;
+}
+
+.aside-custom{
+    background-color: #DFFFC4
+}
+
+@media (min-width: 992px){
+    .aside-lg-custom{
+        height: 30vh;
+    }
+}
+
+@media (max-width: 576px) {
+    .flex-xs-column{
+        flex-direction: column;
+    }
+    .post-description-section{
+        padding-top: 2%;
+    }
+    .h-sx-25{
+        height: 25%!important;
+    }
+    .h-sx-65{
+        height: 65%!important;
+    }
+}   
+
+
+.aside-link{
+    font-family: cursive;
+    font-size: 1.5em;
+}
+
+.border-custom{
+    border: 2.5px solid black;
+}
+
+.margin-custom{
+    margin: 0% 5%;
+}
+
+#add-btn{
+    width: 15%;
+    position: fixed;
+    left: 85%;
+}
