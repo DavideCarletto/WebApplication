@@ -3,6 +3,10 @@
     margin: 2% 10%;
 }
 
+p{
+   word-wrap: break-word;
+}
+
 /* body{
     background-color: #FFF8EA;
 } */
@@ -44,6 +48,10 @@
 
 .fs-xl-custom{
     font-size: 2rem;
+}
+
+.w-90{
+    width: 70%!important;
 }
 
 @media (max-width: 767px){
@@ -112,12 +120,12 @@
     .fs-lg-custom{
         font-size: 1.5rem;
     }
+
     .w-lg-custom{
         width: 12%!important;
     }
     .h-lg-custom{
         height: 12%!important;
     }
-    
-}
 
+}

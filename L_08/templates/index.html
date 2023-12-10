@@ -11,16 +11,16 @@
     <section class = "d-flex flex-column col-lg col-11 py-3 border-custom mt-lg-0 mt-5 margin-custom" id= "posts-section">
         {% for user_post in posts %}
         <article class = "d-flex flex-xs-column py-xs-5">
-            <section id = "img_post_container" class="w-35 h-85">
-                <a href="{{url_for('post', id = loop.index)}}" class = "post-picture mb-lg-5 mb-md-5 mb-sm-5 w-lg-50 w-md-50">
-                    <img class="w-100 h-100 d-inline" src="{{url_for('static', filename = user_post.post_img)}}" alt="Foto post">
+            <section id = "img_post_container" class="w-35 h-85 h-xs-100 w-xs-100">
+                <a href="{{url_for('post', id = user_post.id)}}" class = "post-picture mb-lg-5 mb-md-5 mb-sm-5 w-lg-50 w-md-50">
+                    <img class="w-100 h-100 d-inline" src="{{url_for('static', filename = user_post.post_img_path)}}" alt="Foto post">
                 </a>
             </section>
             <section class= "d-flex flex-wrap px-lg-3 px-md-3 px-sm-3 post-description-section h-50 flex-fill w-50 w-xs-100">
-                <img class= "h-25 h-sx-25 profile-picture" src="{{url_for('static', filename = user_post.profile_img)}}" alt="Foto profilo">
+                <img class= "h-25 h-sx-25 profile-picture" src="{{url_for('static', filename = user_post.profile_img_path)}}" alt="Foto profilo">
                 <p class="h-25 h-sx-25">{{ user_post.username }}</p>
                 <p class = "h-25 h-sx-25 text-end flex-grow-1">{{ user_post.data}}</p>
-                <p class= "text-justify flex-wrap h-sx-65">{{ user_post.testo }}</p>
+                <p class= "text-justify w-100 h-sx-65">{{ user_post.testo }}</p>
             </section>
         </article>
         {% endfor %}
@@ -40,7 +40,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-            <form action="{{ url_for("create_post") }}" method="post" enctype="multipart/form-data">
+            <form action="{{ url_for("create_post", posts = posts) }}" method="post" enctype="multipart/form-data">
               <div class="modal-body">
                   <div class="dropdown">
                     <div class="form-group mb-3">

@@ -12,7 +12,11 @@
     background-color: #DFFFC4
 }
 
- .w-35{
+p{
+   word-wrap: break-word;
+}
+
+.w-35{
          width: 35%!important;
  }
 

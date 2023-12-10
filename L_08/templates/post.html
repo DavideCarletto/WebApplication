@@ -5,54 +5,54 @@
 <div class = "d-flex py-5 px-5 flex-column">
     <section class= "row justify-content-center w-75 w-xs-100 mx-auto flex-xs-column" id="post-section">
       <section class = "d-xs-flex d-none border-xs-owner" id = "post-owner-section">
-        <img class = " p-4 w-25 w-xs-custom h-100 h-md-75 rounded-circle" src="{{url_for('static', filename = post.profile_img)}}" alt="">
+        <img class = " p-4 w-25 w-xs-custom h-100 h-md-75 rounded-circle" src="{{url_for('static', filename = post.profile_img_path)}}" alt="">
         <p class="py-4 px-2 fw-bold fs-lg-custom fs-md-custom ">{{ post.username }}</p>
         <p class= "py-4 pe-5 text-end flex-grow-1 fw-lighter fst-italic fs-lg-custom">{{ post.data }}</p>
       </section>
       <section class = "px-0 col-5 w-xs-100 border-xs-lr" id="post-img-section">
-        <img class= "d-flex mx-auto w-xs-95 h-100  w-100 img-fluid" src="{{url_for('static', filename = post.post_img)}}" alt="Post-1">
+        <img class= "d-flex mx-auto w-xs-95 h-100  w-100 img-fluid" src="{{url_for('static', filename = post.post_img_path)}}" alt="Post-1">
       </section>
 
       <section class="col-7 border-custom border-xs-lr d-flex flex-column px-0 pb-3 w-xs-100" id="right-post-section">
         <section class = "d-flex" id = "post-owner-section">
-          <img class = " p-4  w-25 w-xs-custom h-100 h-md-75  rounded-circle" src="{{url_for('static', filename = post.profile_img)}}" alt="">
+          <img class = " p-4  w-25 w-xs-custom h-100 h-md-75  rounded-circle" src="{{url_for('static', filename = post.profile_img_path)}}" alt="">
           <p class="py-4 px-2 fw-bold fs-lg-custom fs-md-custom ">{{post.username}}</p>
           <p class= "py-4 pe-5 text-end flex-grow-1 fw-lighter fst-italic fs-lg-custom">{{ post.data }}</p>
         </section>
 
-        <section class = "ps-4 pt-2 flex-grow-1" id="description-section">
-          <p class = "fs-lg-custom">{{ post.testo }}</p>
+        <section class = "ps-4 pt-2 flex-grow-1 w-100" id="description-section">
+          <p class = "pe-4 fs-lg-custom flex-wrap">{{ post.testo }}</p>
         </section>
       </section>
     </section>
     <section class="w-75 w-xs-100 d-flex flex-column pb-3 mx-auto border-comment-custom" id="comment-section">
       <p class="fw-bold fs-xl-custom flex-grow-1 text-center font-custom pt-5"> Commenti</p>
-        {% for i in range(3)%}
+        {% for comment in post.comment_list %}
           <section class = "d-flex " id = "comment-owner-section">
-            <img class = " p-4  w-md-custom h-md-custom w-lg-custom h-lg-custom w-xs-custom h-xs-custom rounded-circle" src="{{url_for('static', filename = post.profile_img)}}" alt="">
+            <img class = " p-4  w-md-custom h-md-custom w-lg-custom h-lg-custom w-xs-custom h-xs-custom rounded-circle" src="{{url_for('static', filename = comment.profile_img_path)}}" alt="">
             <section class="d-flex flex-column my-0">
               <section class="d-flex">
-                <p class="pt-4 px-2 fw-bold fs-lg-custom fs-md-custom my-0">{{ post.username }}</p>
-                <p class= "pt-4 px-3 fst-italic fw-lighter mt-lg-2 mb-0">{{ post.data }}</p>
+                <p class="pt-4 px-2 fw-bold fs-lg-custom fs-md-custom my-0">{{ comment.username }}</p>
+                <p class= "pt-4 px-3 fst-italic fw-lighter mt-lg-2 mb-0">{{ comment.data }}</p>
               </section>
-              <p class = "px-2 pt-2 mb-4 fs-md-custom">{{ post.testo }}</p>
+              <p class = "px-2 pt-2 mb-4 fs-md-custom">{{ comment.testo }}</p>
             </section>
           </section>
         {% endfor %}
     </section>
 
-    <form class="w-50 w-xs-100 pb-3 mx-auto mt-5 border-add-custom form-inline" action="#" method="post">
+    <form class="w-50 w-xs-100 pb-3 mx-auto mt-5 border-add-custom form-inline" action="{{ url_for("add_comment", id= post.id) }}" method="post">
         <div class = "px-3 align-items-center">
             <h2 class="mx-auto text-center mt-2 mb-4 font-custom">Commenta anche tu</h2>
             <div class="row mt-3">
                 <div class="form-group mb-3 col-5">
                     <label for="username">Username</label>
-                    <input type="text" class="form-control mt-1" id="username" placeholder="Username">
+                    <input type="text" class="form-control mt-1" id="username" placeholder="Username" name = "username">
                 </div>
 
                  <div class="form-group mb-3 col-2">
                   <label class="mr-sm-2 mb-3" for="inputRate">Valuta</label>
-                  <select class="custom-select mr-sm-2" id="inputRate">
+                  <select class="custom-select mr-sm-2" id="inputRate" name = "rate">
                     <option selected>Scegli...</option>
                     <option value="1">1 stella</option>
                     <option value="2">2 stelle</option>
@@ -70,7 +70,7 @@
 
             <div class="form-group mb-3">
                     <label for="exampleFormControlTextarea1" class="mb-1">Descrizione</label>
-                    <textarea class="form-control" placeholder="Inserisci un commento" name="testo" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" placeholder="Inserisci un commento" name="comment" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
 
             <div class="col-auto">
