@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %} Profile {% endblock %}
+
+{% block main %}
+
+    <section class="annunci container tue-prenotazioni-container" id="annunci">
+        <div class="heading-annunci">
+            <h2 id="tue-prenotazioni" class="font-title"> Le tue prenotazioni</h2>
+        </div>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-wrap="false">
+            <div class="carousel-indicators">
+{#            genero un indicatore del carosello per ogni gruppo #}
+                {% for batch in prenotazioni|batch(3) %}
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                {% endfor %}
+            </div>
+
+            <div class="carousel-inner">
+                {% for batch in prenotazioni|batch(3) %}
+                    <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
+                        <div class = "annunci-containter container pt-3">
+                            {% for prenotazione in batch %}
+                                <a href="{{url_for('show_annuncio', id = prenotazione.AnnuncioID)}}" class="text-reset" id="link-annuncio" >
+                                    <div class="box">
+                                        <img src="{{url_for('static', filename = prenotazione.mainfoto)}}" alt = "img.png">
+                                        <div class="content-nomargin">
+                                            <div class="text">
+                                                <h3> <i class='bx bxs-calendar'></i> {{ prenotazione.Data }}</h3>
+                                            </div>
+                                            <div class="icons">
+                                                <i class="fa-solid fa-clock"><span> {{prenotazione.OraInizio}}-{{ prenotazione.OraFine }}</span></i>
+                                                {#                                                {% if annuncio.arredata == 'SI' %} <i class='bx bxs-package'></i>{% endif %}#}
+                                            </div>
+                                        </div>
+                                        <div class="prenotazione-status">
+                                            <h3> <i{% if prenotazione.Stato == "richiesta" %} class="fa-regular fa-clock" {% elif prenotazione.Stato == "rifiutata" %} class="fa-solid fa-x" {% else %} class="fa-solid fa-check"{% endif %}> </i> {{ prenotazione.Stato }}</h3>
+                                        </div>
+                                        <div class="motivo">
+                                            <h3>Motivo rifiuto: {% if prenotazione.Stato == "rifiutata" %}{{ prenotazione.MotivoRifiuto }} {% endif %}</h3>
+                                        </div>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+
+
+{% endblock %}

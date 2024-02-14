@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %} Prenotazione {% endblock %}
+
+{% block main %}
+    <section class="book" id = "book">
+        <div class="container">
+            <div class="main-text">
+                <h1> <span>P</span>renota</h1>
+            </div>
+            <div class="row">
+                <div class="col-6 py-3 py-0">
+                    <div class="card">
+                        <img src="{{ url_for('static', filename = annuncio["percorsoFoto"]) }}" alt="">
+                    </div>
+                </div>
+                <div class="col-6 py-3 px-5">
+                    <form action="{{ url_for('prenota', id=id) }}" method="post">
+                        <label for="type" class="first-book-selector-label">Seleziona il tipo di visita che vuoi effettuare:</label>
+                        <select id="type" name="tipo" class="form-control book-selector" required>
+                            <option value="Di persona">Di persona</option>
+                            <option value="Da remoto">Da remoto</option>
+                        </select>
+
+                        <label for="data" class="book-selector-label">Seleziona una data di interesse:</label>
+                        <input id= "data" name = "data" type="date" class="form-control  book-selector" placeholder="Data" min = "{{ data_corrente }}" max = "{{ data_massima }}" required><br>
+                        <button type="submit" value = "cercaorari" name="cerca-orari" class="submit  book-selector"> Cerca orari</button>
+                    </form>
+                </div>
+            </div>
+
+            {% if status == "cercaorari" %}
+                <section class="annunci container" id="annunci">
+                    <div class="heading-orari">
+                        <h2> Orari Disponibili per il {{ data }}:</h2>
+                    </div>
+                    <form action="{{ url_for('effettua_prenotazione', id_annuncio=annuncio.id, data = data, tipo=tipo) }}" method="post">
+                        <div id="carouselExampleIndicators" class="carousel slide carousel-orari" data-bs-wrap="false">
+                            <div class="carousel-indicators" id="carousel-indicators-orari">
+                                {% for batch in oredisponibili|batch(3) %}
+                                    <button type="submit" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                {% endfor %}
+                            </div>
+
+                            <div class="carousel-inner">
+                                {% for batch in oredisponibili|batch(3) %}
+                                    <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
+                                        <div class = "orari-containter container pt-3">
+                                            {% for fasciaoraria in batch %}
+                                                <button type="submit" name="orario-submit" class="text-reset box" id="link-annuncio" value="{{ fasciaoraria }}">
+                                                    <h3>{{fasciaoraria}}</h3>
+                                                </button>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </form>
+                </section>
+            {% endif %}
+        </div>
+    </section>
+
+{% endblock %}

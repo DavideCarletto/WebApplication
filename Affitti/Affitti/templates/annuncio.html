@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %} Annuncio {% endblock %}
+
+{% block main %}
+
+    <section class="view-property">
+        <div class="details">
+            <div class="thumb">
+
+                {% for image in annuncio["images"] %}
+                    {% if image.main == "SI" %}
+                        <div class="big-image">
+                            <img src="{{ url_for("static", filename=image.percorsoFoto) }}" alt="">
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <form method="post" action="{{ url_for('show_annuncio', id=id) }}">
+                    <div class="small-images">
+                        {% for image in annuncio["images"] %}
+                            {% if image.main == "NO" %}
+                                <button type="submit" name="image_button" value="{{image.percorsoFoto}}">
+                                    <img src="{{ url_for("static", filename= image.percorsoFoto) }}" alt="">
+                                </button>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </form>
+            </div>
+            <h3 class="name font-title">{{ annuncio["titolo"] }}</h3>
+            <div class="info">
+                <p class="location"> <i class='bx bxs-location-plus'><span> Via {{ annuncio["indirizzo"] }}</span></i></p>
+                <p class="location">  <i class='bx bx-home'><span> {{ annuncio["tipo"] }}</span></i></p>
+                <p class="location">  <i class='bx bx-bed'><span> {{ annuncio["locali"] }}</span></i></p>
+                <p class="location">  <i class='bx bxs-purchase-tag'><span> {{ annuncio["prezzo"] }}€</span></i></p>
+            </div>
+            <h3 class="title">Dettagli</h3>
+            <div class="flex">
+                <div class="box">
+                    <p> <i class='bx bxs-location-plus'></i><span>Indirizzo: Via {{ annuncio["indirizzo"] }}</span></p>
+                    <p> <i class='bx bx-home'></i><span>Tipo: {{ annuncio["tipo"] }}</span></p>
+                    <p> <i class='bx bx-bed'></i><span>Numero di locali: {{ annuncio["locali"] }}</span></p>
+                    <p><i class='bx bxs-purchase-tag'></i><span>Prezzo: {{ annuncio["prezzo"] }}€</span></p>
+                    <p><i {% if annuncio["arredata"] == 'SI' %} class="fa-solid fa-check"{% else %} class="fa-solid fa-x" {% endif %}></i><span> Arredamento presente: {{ annuncio["arredata"] }}</span></p>
+                    <p><i class="fa-solid fa-user"></i><span>Recapito locatore: {{ annuncio["userid"] }}</span></p>
+                </div>
+            </div>
+            <h3 class="title">Descrizione</h3>
+            <p class="description">{{ annuncio["desc"] }}</p>
+        </div>
+    </section>
+    <div class="prenota-div h-25 mt-0">
+            <form method="POST" action="{{ url_for("prenota", id = id)}}" >
+                <button type="submit"  {% if prenotabile == true %} class="prenota-btn action_btn a-nav" {% else %} class = "prenota-btn-disabled" disabled {% endif   %}>{% if prenotabile == true %}Prenota visita {% else %} Non disponibile {% endif %}</button>
+            </form>
+    </div>
+
+{% endblock %}

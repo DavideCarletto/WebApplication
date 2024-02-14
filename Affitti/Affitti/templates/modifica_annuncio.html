@@ -1,0 +1,110 @@
+{% extends "base.html" %}
+{% block title %} Annuncio {% endblock %}
+
+{% block main %}
+
+    <section class="view-property">
+
+        <div class="details">
+            <div class="thumb">
+
+                {% for image in annuncio["images"] %}
+                    {% if image.main == "SI" %}
+                        <div class="d-flex d-flex justify-content-center w-50 main-foto">
+                            <div class="big-image ">
+                                <a href="{{ url_for('elimina_foto', id = image.id) }}"class="btn elimina-foto-btn">X</a>
+                                <img  src="{{ url_for("static", filename= image.percorsoFoto) }}" alt="">
+                                <form action="{{ url_for('aggiungi_foto', id_annuncio = annuncio.id) }}" method="post" enctype="multipart/form-data">
+                                    <label for="fileInput" class="btn btn-gray aggiungi-foto mt-3 ms-2">Aggiungi Foto</label>
+                                    <input class="form-control" type="file" id="fileInput" name="images" accept="image/*" multiple required>
+                                    <button type="submit" class="btn btn-gray mt-3 ms-2"> Salva</button>
+                                </form>
+                            </div>
+                        </div>
+
+                    {% endif %}
+                {% endfor %}
+                <div class="small-images">
+                    {% for image in annuncio["images"] %}
+                        {% if image.main == "NO" %}
+                            <div>
+                                <a  href="{{ url_for('elimina_foto',id = image.id)  }}" class="btn elimina-foto-btn">X</a>
+                                <img  src="{{ url_for("static", filename= image.percorsoFoto) }}" alt="">
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            <form class="hidden" action="{{ url_for('effettua_modifica', id =annuncio.id)}}" method="post">
+                <div class="d-flex align-items-center">
+                    <p class="location d-inline-block">Titolo: </p>
+                    <input class="form-control book-selector mb-2 ms-4 w-25" name="titolo" placeholder="{{ annuncio["titolo"] }}">
+                </div>
+                <div class="info">
+                    <p class="location">  <i class='bx bxs-location-plus'><span> Via {{ annuncio["indirizzo"] }}</span></i></p>
+                    <p class="location">  <i class='bx bx-home'><span> {{ annuncio["tipo"] }}</span></i></p>
+                    <p class="location">  <i class='bx bx-bed'><span> {{ annuncio["locali"] }}</span></i></p>
+                    <p class="location">  <i class='bx bxs-purchase-tag'><span> {{ annuncio["prezzo"] }}€</span></i></p>
+                </div>
+                <h3 class="title">Dettagli</h3>
+                <div class="flex">
+                    <div class="box row">
+                        <div class="col-5 d-flex flex-column w-25"> <!-- Modifica qui -->
+                            <p class="me-1 "><i class='bx bxs-location-plus'></i><span>Indirizzo: </span></p>
+                            <p class="me-1"><i class='bx bx-home'></i><span>Tipo: </span></p>
+                            <p class="me-1"><i class='bx bx-bed'></i><span>Locali: </span></p>
+                            <p class="me-1"><i class='bx bxs-purchase-tag'></i><span>Prezzo €: </span></p>
+                            <p class="me-1"><i class='bx bxs-package'></i><span>Arredata: </span></p>
+                            <p class="me-1"><i {% if annuncio["arredata"] == 'SI' %} class="fa-solid fa-check"{% else %} class="fa-solid fa-x" {% endif %}></i><span>Disponibile: </span></p>
+                        </div>
+                        <div class="col-7 d-flex flex-column w-50">
+                            <div>
+                                <label class="d-flex">
+                                    <p class="me-2">Via: </p>
+                                    <input class="form-control book-selector mb-2 w-50" placeholder="{{ annuncio["via"] }}" name="via" disabled>
+                                    <p  class="me-2 ms-4">N: </p>
+                                    <input class="form-control book-selector mb-2 w-25" placeholder="{{ annuncio["n_civico"] }}" name="n_civico" disabled>
+                                    <p  class="me-2 ms-4">Città: </p>
+                                    <input class="form-control book-selector mb-2 w-25" placeholder="{{ annuncio["citta"] }}" name="citta" disabled>
+                                </label>
+                            </div>
+                            <label for="type"></label>
+                            <select id="type" name="tipo" class="form-control book-selector mb-2">
+                                <option value="">Casa indipendente</option>
+                                <option value="">Appartamento</option>
+                                <option value="">Loft</option>
+                                <option value="">villa</option>
+                                <label>
+                                    <input class="form-control book-selector mb-2" name="locali" placeholder="{{ annuncio["locali"] }}">
+                                </label>
+                                <label>
+                                    <input type="number" class="form-control book-selector mb-2" name="prezzo" placeholder="{{ annuncio["prezzo"]}}">
+                                </label>
+                            </select>
+                            <label for="arredata"></label>
+                            <select id="arredata" name="arredata" class="form-control book-selector mb-2" >
+                                <option value="" hidden=> {{ annuncio["arredata"] }}</option>
+                                <option value="SI">SI</option>
+                                <option value="NO">NO</option>
+                            </select>
+
+                            <label for="disponibile"></label>
+                            <select id="disponibile" name="disponibile" class="form-control book-selector mb-2" >
+                                <option value="" hidden=> {{ annuncio["disponibile"] }}</option>
+                                <option value="SI">SI</option>
+                                <option value="NO">NO</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="title">Descrizione</h3>
+                <label class="w-25">
+                    <textarea class="form-control" name="description" rows="4" placeholder="{{ annuncio.desc }}"></textarea>
+                </label>
+
+                <button type="submit" class="btn btn-primary d-flex mt-4 modifica-btn"> Salva</button>
+            </form>
+        </div>
+    </section>
+
+{% endblock %}

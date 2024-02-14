@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+
+{% block title %} Titolo {% endblock %}
+
+{% block main %}
+
+    <header>
+        <section id="hero">
+            <div class="main-text mb-4">
+                <h1 class="font-title"> <span>C</span>uneo affitti</h1>
+            </div>
+        </section>
+
+        <div class="home-bottom">
+            <div class="container">
+                <div class="box">
+                    <h5>Location:</h5>
+                    <p> Provincia di Cuneo</p>
+                </div>
+                <div class="box">
+                    <h5>Tipi di abitazione:</h5>
+                    <p>Case indipendenti, appartamenti, loft, ville </p>
+                </div>
+                <div class="box">
+                    <h5>Ordina per:</h5>
+                    <p> Numero di locali</p>
+                </div>
+                <div class="box box-nomargin ">
+                    <form action="{{ url_for('index') }}" method="post">
+                        <button type="submit" class="btm btn-gray ordina-btn" name="sort" value="sort"> Ordina</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+
+
+    <section class="annunci container" id="annunci">
+        <div class="heading-annunci">
+            <div class="main-text mt-5">
+                <h1 class="font-title"> Annunci recenti</h1>
+            </div>
+        </div>
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-wrap="false">
+            <div class="carousel-indicators">
+                {% for batch in annunci|batch(3) %}
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                {% endfor %}
+            </div>
+
+{# divido in gruppi da 3 gli annunci con batch e per ogni batch piazzo una slide del carosello, che avrà quindi al max 3 annuncii#}
+            <div class="carousel-inner">
+                {% for batch in annunci|batch(3) %}
+                    <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
+                        <div class = "annunci-containter container pt-3">
+                            {% for annuncio in batch %}
+                                <a href="{{url_for('show_annuncio', id = annuncio.id)}}" class="text-reset" id="link-annuncio" >
+                                    <div class="box">
+                                        <img src="{{url_for('static', filename = annuncio.fotopath)}}" alt = "img.png">
+                                        <h3>{{annuncio.prezzo}}€ </h3>
+                                        <div class="content">
+                                            <div class="text">
+                                                <h3>{{ annuncio.tipo }}</h3>
+                                            </div>
+                                            <div class="icons">
+                                                <i class='bx bxs-location-plus'><span>{{ annuncio.indirizzo }}</span></i>
+                                                <i class='bx bx-bed'> <span>{{ annuncio.locali }}</span></i>
+                                                {% if annuncio.arredata == 'SI' %} <i class='bx bxs-package'></i>{% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </section>
+{% endblock %}

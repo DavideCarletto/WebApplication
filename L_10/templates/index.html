@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %} Homepage {% endblock %}
+{% block content %}
+<div class="row py-5">
+    <aside class="d-flex flex-lg-column col-lg-3 col-11 aside-lg-custom aside-custom border-custom margin-custom">
+        <a id = "oggi" class= "flex-fill aside-link link-dark" href="#" title="Oggi">Oggi</a>
+        <a id = "questa-settimana" class= "flex-fill link-dark aside-link text-lg-start text-center" href="#" title="Questa settimana">Questa settimana</a>
+        <a id ="questo-mese" class= "flex-fill link-dark aside-link h-100 text-lg-start text-end" href="#" title="Questo mese">Questo mese</a>
+    </aside>
+
+    <section class = "d-flex flex-column col-lg col-11 py-3 border-custom mt-lg-0 mt-5 margin-custom" id= "posts-section">
+        {% for user_post in posts %}
+        <article class = "d-flex flex-xs-column py-xs-5">
+            <section id = "img_post_container" class="w-35 h-85 h-xs-100 w-xs-100">
+                <a href="{{url_for('post', id = user_post.id)}}" class = "post-picture mb-lg-5 mb-md-5 mb-sm-5 w-lg-50 w-md-50">
+                    <img class="w-100 h-100 d-inline" src="{{url_for('static', filename = user_post.post_img_path)}}" alt="Foto post">
+                </a>
+            </section>
+            <section class= "d-flex flex-wrap px-lg-3 px-md-3 px-sm-3 post-description-section h-50 flex-fill w-50 w-xs-100">
+                <img class= "h-25 h-sx-25 profile-picture" src="{{url_for('static', filename = user_post.profile_img_path)}}" alt="Foto profilo">
+                <p class="h-25 h-sx-25">{{ user_post.username }}</p>
+                <p class = "h-25 h-sx-25 text-end flex-grow-1">{{ user_post.data}}</p>
+                <p class= "text-justify w-100 h-sx-65">{{ user_post.testo }}</p>
+            </section>
+        </article>
+        {% endfor %}
+
+    </section>
+
+    <button class= "fixed-bottom btn btn-img" id= "add-btn"  type="button" data-toggle="modal" data-target="#exampleModalCenter">
+        <img class="h-100 w-100" src="{{url_for('static', filename = 'images/noun-plus-5159238.png')}}" alt="AddBtn">
+    </button>
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+            <form action="{{ url_for("create_post", posts = posts) }}" method="post" enctype="multipart/form-data">
+              <div class="modal-body">
+                  <div class="dropdown">
+                    <div class="form-group mb-3">
+                      <label for="inputState">Username</label>
+                      <select id="inputState" class="form-control" name="username">
+                        {% for post in posts %}
+                          <option>{{ post.username }}</option>
+                        {% endfor %}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label for="exampleFormControlTextarea1">Che novità mi porti?</label>
+                    <textarea class="form-control" placeholder="Inserisci un testo per il tuo post" name="testo" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label class="mb-2" for="exampleFormControlFile1">Aggiungi un'immagine se vuoi</label>
+                    <input type="file" class="form-control-file" id="exampleFormControlFile1" name="post_img">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="inputDate">Data</label>
+                    <input type="date" class="form-control" id="inputDate" name="inputDate">
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+        </div>
+      </div>
+    </div>
+</div>
+
+{% endblock %}

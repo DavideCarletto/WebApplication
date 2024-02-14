@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+
+{%  block title %} I tuoi annunci {% endblock %}
+
+{% block main %}
+    <section class="annunci container" id="annunci">
+        <div class="heading-annunci pt-3">
+            <h2 class="fw-bolder font-title"> I tuoi annunci</h2>
+        </div>
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-wrap="false">
+            <div class="carousel-indicators">
+                {% for batch in annunci|batch(3) %}
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="{{ loop.index }}" class="active" aria-current="true" aria-label="Slide 1"></button>
+                {% endfor %}
+
+{#            se la lunghezza è multipla di 3 aggiungo un indicatore per una slide al cui interno ci sarà il mio bottone di aggiungi#}
+                {% if annunci|length % 3==0 %}
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide {{ batch_count }}"></button>
+                {% endif %}
+            </div>
+            <div class="carousel-inner">
+                {% if annunci|length == 0 %}
+                    <div class="content aggiungi-card">
+                        <button type="button" data-toggle="modal" data-target="#aggiungiannuncio" class="btn btn-primary btn-gray mr-2">Aggiungi</button>
+                    </div>
+                {% endif %}
+                {% for batch in annunci|batch(3) %}
+                    {% set batch_count=loop.index %}
+                    <div class="carousel-item {% if loop.index == 1 %} active {% endif %}">
+                        <div class = "annunci-containter container pt-3">
+                            {% for annuncio in batch %}
+                                <div class="box">
+                                    <a href="{{url_for('modifica_annuncio', id = annuncio.id)}}" class="text-reset" id="link-annuncio" >
+                                        <img src="{{url_for('static', filename = annuncio.fotopath)}}" alt = "img.png">
+                                        <h3>{{annuncio.titolo}} </h3>
+                                        <div class="content">
+                                            <div class="text">
+                                                <h3>{{ annuncio.tipo }}</h3>
+                                            </div>
+                                            <div class="icons">
+                                                <i class='bx bxs-location-plus'><span>{{ annuncio.indirizzo }}</span></i>
+                                                <i class='bx bx-bed'> <span>{{ annuncio.locali }}</span></i>
+                                                {% if annuncio.arredata == 'SI' %} <i class='bx bxs-package'></i>{% endif %}
+                                            </div>
+                                        </div>
+                                        <div class="prenotazione-status">
+                                            <h3> <i{% if annuncio.disponibile == "NO" %} class="fa-solid fa-x" {% else %} class="fa-solid fa-check"{% endif %}> </i> Disponibile: {{ annuncio.disponibile }}</h3>
+                                        </div>
+                                    </a>
+                                    <div class="mt-3 d-flex justify-content-center">
+                                        <button type="button" data-toggle="modal" data-target="#eliminaannuncio{{ loop.index*batch_count}}" class="btn btn-primary btn-gray elimina-btn">Elimina</button>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                            {% if batch|length % 3 != 0 %}
+                                <div class="content aggiungi-card">
+                                    <button type="button" data-toggle="modal" data-target="#aggiungiannuncio" class="btn btn-primary btn-gray mr-2">Aggiungi</button>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+                {% if annunci|length % 3 == 0 or annunci|length %}
+                    <div class="carousel-item" >
+                        <div class = "annunci-containter container pt-3" id="mycontainer">
+                            <div class="content aggiungi-card">
+                                <button type="button" data-toggle="modal" data-target="#aggiungiannuncio" class="btn btn-primary btn-gray mr-2">Aggiungi</button>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+    </section>
+    <h2 class="tuoi-annunci-title font-title">Richieste</h2>
+    {% if noreq == false %}
+        <div class="container tuoi-annunci-container pb-5">
+            <div class="row h-100">
+                <div class="col-md-12 h-100">
+                    <div class="card card-white mb-5 overflow-auto h-100" id ="elenco-richieste">
+                        <div class="card-body h-100">
+                            <ul class="list-unstyled">
+                                {% for annuncio in annunci %}
+                                    {% for richiesta in annuncio.richieste %}
+                                        <li class="position-relative booking">
+                                            <div class="media">
+                                                <div class="msg-img richiesta-annuncio-img">
+                                                    <img src="{{ url_for('static', filename =annuncio.fotopath) }}" alt="">
+                                                </div>
+                                                <div class="mr-2 d-inline-block mb-2 richiesta-annuncio-info">
+                                                    <span class="ms-2 mb-2 d-block"><i class="fa-solid fa-user"></i>  Utente: {{ richiesta.email }}</span>
+                                                    <span class="ms-2 mb-2 d-block"><i class='bx bxs-calendar'></i>   Data: {{ richiesta.Data }}</span>
+                                                    <span class="ms-2 mb-2 d-block"><i class="fa-solid fa-clock"></i>  Ora: {{ richiesta.OraInizio }}-{{ richiesta.OraFine }}</span>
+                                                    <span class="ms-2 mb-2 d-block"> <i{% if richiesta.Stato == "RICHIESTA" %} class="fa-regular fa-clock" {% elif richiesta.Stato == "RIFIUTATA" %} class="fa-solid fa-x" {% else %} class="fa-solid fa-check"{% endif %}> </i>  Stato: {{ richiesta.Stato}}</span>
+                                                </div>
+                                                <h5 class="mb-4 annuncio-title">{{ annuncio.titolo }} </h5>
+                                            </div>
+                                            <div class="buttons-to-right">
+                                                {% if richiesta.Stato == "RICHIESTA" %}
+                                                    <form action="{{ url_for("azione_richiesta") }}" method="post">
+                                                        <button type="submit" name = "accetta-richiesta" value = "{{ richiesta.prenotazioneID }}" class="btn btn-primary btn-gray"><a class="btn-gray accetta"><i class="fa-solid fa-check"></i> Accetta </a></button>
+                                                    <button  type="button" data-toggle="modal" data-target="#exampleModalCenter{{ richiesta.prenotazioneID }}" class="btn btn-primary btn-gray mr-2"><i class="fa-solid fa-x"></i> Rifiuta</button>
+                                                    </form>
+                                                {% endif %}
+                                            </div>
+                                        </li>
+                                        <div class="modal fade" id="exampleModalCenter{{ richiesta.prenotazioneID }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Inserici un motivo per il rifiuto:</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="{{ url_for("azione_richiesta") }}" method="post">
+                                                        <div class="modal-body">
+                                                            <input class="form-control  book-selector" type="text" id="motivo-rifiuto" name="motivo-rifiuto" placeholder="Inserisci il testo qui" required>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                            <button type="submit"  name="rifiuta-richiesta" value="{{ richiesta.prenotazioneID }}" class="btn btn-primary">Save changes</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+
+    <form action="{{ url_for('aggiungi_annuncio')}}" method="post" enctype="multipart/form-data">
+        <div class="modal fade" id="aggiungiannuncio" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title fw-bolder" id="exampleModalLongTitle"> Informazioni relative all'annuncio</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <label for="titolo" class="fw-bolder mb-1">Titolo</label>
+                        <input class="form-control  book-selector" type="text" name = "titolo" placeholder="Inserisci il titolo qui" required>
+
+                        <div id = "indirizzoabitazione" class="mt-4">
+                            <label for="via" class="fw-bold label-indirizzo">Via:</label>
+                            <input class="form-control  book-selector" type="text" id = "via" name="via" placeholder="Via" required>
+
+                            <label for="numerocivico" class="fw-bold">Num. civ:</label>
+                            <input class="form-control  book-selector" type="text" id = "numerocivico" name="numerocivico" placeholder="Num" required>
+
+                            <label for="citta" class="fw-bold label-indirizzo">Città:</label>
+                            <input class="form-control  book-selector" type="text" id = "citta" name="citta" placeholder="Città" required>
+
+                        </div>
+
+                        <label for="type" class="fw-bolder mb-2 mt-4" > Tipo di abitazione</label>
+                        <select id="type" name="tipo" class="form-control book-selector" required>
+                            <option value="Casa indipendente">Casa indipendente</option>
+                            <option value="Appartamento">Appartamento</option>
+                            <option value="Loft">Loft</option>
+                            <option value="Villa">villa</option>
+                        </select>
+
+                        <div id = "indirizzoabitazione" class="mt-4">
+                            <label for="numlocali" class="fw-bold">Numero di locali:</label>
+                            <input class="form-control  book-selector locali" type="text" id = "numlocali" name="numlocali" placeholder="Locali" required>
+
+                            <label class="form-check-label fw-bold " for="arredata">Arredata</label>
+                            <input class="form-check-input" type="checkbox" name="arredata" value="Arredata">
+
+                            <label class="form-check-label fw-bold" for="disponibile"> Disponibile</label>
+                            <input class="form-check-input " type="checkbox" name="disponibile" value="disponibile">
+
+                        </div>
+
+                        <div class="form-floating mt-3">
+                            <label for="descrizioneannuncio mb-3">Descrizone</label>
+                            <textarea class="form-control desc-area" placeholder="Leave a comment here" name="descrizioneannuncio"></textarea>
+                        </div>
+
+                        <label for="prezzo" class="fw-bold mt-3">Prezzo:</label>
+                        <input class="form-control  book-selector locali mt-3" type="number" name = "prezzo"  required><span class="fw-bold "> €</span>
+
+                        <div class="mb-3 mt-4">
+                            <label for="formFile" class="form-label fw-bold">Foto (max:5)</label>
+                            <input class="form-control" type="file" id="formFile" name="images" accept="image/*" multiple required>
+                        </div>
+                        <button type="submit" class="btn btn-gray btn-primary mt-3" id="aggiungi-annuncio-btn">Aggiungi</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    {% for annuncio in annunci %}
+        <div class="modal fade" id="eliminaannuncio{{ loop.index }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel{{ loop.index }}">Sei sicuro di voler eliminare l'annuncio?</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        L'annuncio che elimini non potrà più essere recuperato in alcun modo.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <form action="{{ url_for('elimina_annuncio') }}" method="post">
+                            <button type="submit" class="btn btn-primary elimina-btn-save" name = "elimina-annuncio-btn" value = "{{ annuncio.id }}">Elimina</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+
+{% endblock %}
